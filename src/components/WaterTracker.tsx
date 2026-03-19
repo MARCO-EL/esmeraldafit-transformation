@@ -11,33 +11,36 @@ export default function WaterTracker() {
 
   return (
     <div className="surface-card p-5">
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2">
-          <Droplets className="w-5 h-5 text-primary" />
-          <h3 className="font-semibold text-sm">Hidratação</h3>
-        </div>
-        <span className="text-data text-sm text-muted-foreground">
-          {water}ml / {goal}ml
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="font-bold text-sm flex items-center gap-2">
+          <Droplets className="w-4 h-4 text-blue-500" />
+          Hidratação
+        </h3>
+        <span className="text-data text-xs font-semibold text-muted-foreground">
+          {water}ml <span className="text-[10px] font-normal">/ {goal}ml</span>
         </span>
       </div>
 
+      {/* Progress bar */}
       <div className="h-3 bg-secondary rounded-full overflow-hidden mb-4">
         <motion.div
-          className="h-full bg-primary rounded-full"
+          className="h-full rounded-full"
+          style={{ background: "linear-gradient(90deg, hsl(200, 80%, 55%), hsl(190, 90%, 45%))" }}
           initial={{ width: 0 }}
           animate={{ width: `${pct}%` }}
           transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
         />
       </div>
 
-      <div className="flex gap-2">
+      {/* Buttons */}
+      <div className="grid grid-cols-3 gap-2">
         {[250, 500, 1000].map((ml) => (
           <button
             key={ml}
             onClick={() => add(ml)}
-            className="flex-1 flex items-center justify-center gap-1 py-2 rounded-lg gradient-gold text-accent-foreground text-xs font-semibold transition-transform active:scale-95"
+            className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl gradient-gold text-accent-foreground text-xs font-bold shadow-sm active:scale-95 transition-transform"
           >
-            <Plus className="w-3 h-3" />
+            <Plus className="w-3.5 h-3.5" />
             {ml}ml
           </button>
         ))}
